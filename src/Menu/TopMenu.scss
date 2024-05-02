@@ -1,0 +1,25 @@
+.top-nav {
+  nav {
+    background-color: #0d63fe;
+    min-height: 3rem;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+
+    ul {
+      display: flex;
+      gap: 1rem;
+      li {
+        a {
+          color: #fff;
+          text-decoration: none;
+          &:active, &:hover, &:focus {
+            text-decoration: overline;
+            color: antiquewhite;
+          }
+        }
+      }
+    }
+  }
+}

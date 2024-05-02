@@ -6,20 +6,24 @@ import {
   FormGroup,
   TextArea,
   InlineNotification,
-  SelectItem,
-  Select,
 } from "@carbon/react";
 import "./RaisingIssueForm.scss";
 import axios from "axios";
 
 const RaisingIsssueForm = () => {
+  const data = {
+    name: 'Hello',
+    email: 'hello@example.com',
+    message: 'This is for testing purpose only ...',
+  }
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
+    name: data?.name,
+    email: data?.email,
+    message: data?.message,
     // select: ""
   });
 
+ 
   const [errors, setErrors] = useState({});
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -40,6 +44,7 @@ const RaisingIsssueForm = () => {
       axios.post('/user', formData)
       .then(function (response) {
         console.log(response);
+        navigator('/')
       })
       .catch(function (error) {
         console.log(error);
@@ -68,10 +73,7 @@ const RaisingIsssueForm = () => {
       newErrors.message = "Message is required";
       valid = false;
     }
-    // if (!formData.select.trim()) {
-    //   newErrors.select = "Select is required";
-    //   valid = false;
-    // }
+    
 
     setErrors(newErrors);
     return valid;
@@ -111,20 +113,7 @@ const RaisingIsssueForm = () => {
               invalid={!!errors.message}
               invalidText={errors.message}
             />
-            <Select defaultValue="placeholder-item"  id="message"
-              name="message"  value={formData.select}
-              onChange={handleChange}
-              invalid={!!errors.select}>
-              <SelectItem
-             
-                value="placeholder-item"
-                text="Choose an option"
-               
-              />
-              <SelectItem value="option-1" text="Option 1" />
-              <SelectItem value="option-2" text="Option 2" />
-              <SelectItem value="option-3" text="Option 3" />
-            </Select>
+            
             {submitSuccess && (
               <InlineNotification
                 kind="success"

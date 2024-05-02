@@ -5,42 +5,9 @@ import axios from "axios";
 const RaisedIssueTable = () => {
   const [issuesList, setIssuesList] = useState([]);
 
-  const tableData = [
-    {
-      id: 1,
-      fieldName: "Monitor",
-      createdBy: "Dooj",
-      issueId: "d-78162",
-      issueDesc: "Monitor black dot",
-      category: "Computer",
-      state: "Chhattisgarh",
-      priority: "P2",
-      tags: "-",
-      eta: "-",
-      assignedTo: "-",
-      createdOn: "01-05-2024",
-    },
-    {
-      id: 2,
-      fieldName: "Laptop motherboard",
-      createdBy: "Vishal",
-      issueId: "d-009283",
-      issueDesc: "Laptop issue",
-      category: "Laptop",
-      state: "MP",
-      priority: "P3",
-      tags: "-",
-      eta: "-",
-      assignedTo: "-",
-      createdOn: "01-05-2024",
-    },
-  ];
-
   const headers = [
     {
-      // `key` is the name of the field on the row object itself for the header
       key: "fieldName",
-      // `header` will be the name you want rendered in the Table Header
       header: "Field Name",
     },
     {
@@ -85,29 +52,40 @@ const RaisedIssueTable = () => {
     },
   ];
 
-
-
-  const getIssuesList = () => {
-    axios
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then(function (response) {
-        setIssuesList(tableData);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        // always executed
-      });
-  };
   useEffect(() => {
     getIssuesList();
   }, []);
 
-  return (
+  const getIssuesList = () => {
+    axios
+      .get("https://jsonplaceholder.typicode.com/posts?q=10")
+      .then(function (response) {
+        setIssuesList(response.data); // Update state with fetched data
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // Format rows data based on fetched issuesList
+  const formattedRows = issuesList.map((item) => ({
+    fieldName: item.title,
+    createdBy: item.body,
+    issueId: item.id,
+    issueDesc: item.id,
+    category: item.id,
+    state: item.id,
+    priority: item.id,
+    tags: item.id,
+    eta: item.id,
+    assignedTo: item.id,
+    createdOn: item.id,
+  }));
+
+  return (  
     <div>
       <h3>Raised Issues</h3>
-      <GenericTable rows={issuesList} headers={headers} />
+      <GenericTable rows={formattedRows} headers={headers} />
     </div>
   );
 };

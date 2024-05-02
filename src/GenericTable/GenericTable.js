@@ -25,7 +25,6 @@ const {
 const GenericTable = (props) => {
 
   const  {rows, headers} = props
-  
   return (
     <div className="generic-table">
       <DataTable
@@ -89,34 +88,6 @@ const GenericTable = (props) => {
           </TableContainer>
         )}
       />
-      {/* <DataTable
-        rows={initialRows}
-        headers={headers}
-        render={({ rows, headers, getHeaderProps }) => (
-          <TableContainer title="DataTable">
-            <Table>
-              <TableHead>
-                <TableRow>
-                  {headers.map((header) => (
-                    <TableHeader {...getHeaderProps({ header })}>
-                      {header.header}
-                    </TableHeader>
-                  ))}
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {rows.map((row) => (
-                  <TableRow key={row.id}>
-                    {row.cells.map((cell) => (
-                      <TableCell key={cell.id}>{cell.value}</TableCell>
-                    ))}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        )}
-      /> */}
     </div>
   );
 };
