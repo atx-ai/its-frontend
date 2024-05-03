@@ -4,8 +4,10 @@
     min-height: 3rem;
     align-items: center;
     display: flex;
-    justify-content: center;
+    justify-content: right;
     margin-bottom: 2rem;
+    padding-left: 2rem;
+    padding-right: 5rem;
 
     ul {
       display: flex;
@@ -14,9 +16,15 @@
         a {
           color: #fff;
           text-decoration: none;
-          &:active, &:hover, &:focus {
+          &:active,
+          &:hover,
+          &:focus {
             text-decoration: overline;
             color: antiquewhite;
+          }
+          svg {
+            height: 1.5rem;
+            width: 1.5rem;
           }
         }
       }

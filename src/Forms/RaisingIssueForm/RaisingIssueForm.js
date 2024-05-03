@@ -10,20 +10,19 @@ import {
 import "./RaisingIssueForm.scss";
 import axios from "axios";
 
-const RaisingIsssueForm = () => {
+const RaisingIssueForm = () => {
   const data = {
-    name: 'Hello',
-    email: 'hello@example.com',
-    message: 'This is for testing purpose only ...',
-  }
+    created_by: "John Doe",
+    // email: 'hello@example.com',
+    issue_description: "",
+  };
   const [formData, setFormData] = useState({
-    name: data?.name,
+    created_by: data?.created_by,
     email: data?.email,
-    message: data?.message,
+    issue_description: data?.issue_description,
     // select: ""
   });
 
- 
   const [errors, setErrors] = useState({});
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
@@ -39,16 +38,20 @@ const RaisingIsssueForm = () => {
     event.preventDefault();
     if (validateForm()) {
       // Submit your form data here
-      console.log("Form submitted:", formData);
-      setSubmitSuccess(true);
-      axios.post('/user', formData)
-      .then(function (response) {
-        console.log(response);
-        navigator('/')
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      axios
+        .post("http://localhost:8080/issues/", formData)
+        .then(function (response) {
+          console.log(response);
+          setSubmitSuccess(true);
+          setFormData({ ...formData, issue_description: "" });
+          setTimeout(() => {
+            setSubmitSuccess(false);
+          }, 2000);
+          navigator("/");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   };
 
@@ -56,45 +59,45 @@ const RaisingIsssueForm = () => {
     let valid = true;
     const newErrors = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
+    if (!formData.created_by.trim()) {
+      newErrors.created_by = "Created by name is required";
       valid = false;
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-      valid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email is invalid";
-      valid = false;
-    }
+    // if (!formData.email.trim()) {
+    //   newErrors.email = "Email is required";
+    //   valid = false;
+    // } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    //   newErrors.email = "Email is invalid";
+    //   valid = false;
+    // }
 
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
+    if (!formData.issue_description.trim()) {
+      newErrors.issue_description = "Issue description is required";
       valid = false;
     }
-    
 
     setErrors(newErrors);
     return valid;
   };
 
   return (
-    <div className="raising-issue-form">
+    <div className={`raising-issue-form`}>
       <div className="row">
         <h5>Raise Issue</h5>
         <Form onSubmit={handleSubmit} aria-label="sample form">
           <FormGroup>
             <TextInput
-              id="name"
-              name="name"
-              labelText="Name"
-              value={formData.name}
+              id="created_by"
+              name="created_by"
+              labelText="Created By"
+              value={formData.created_by}
               onChange={handleChange}
-              invalid={!!errors.name}
-              invalidText={errors.name}
+              invalid={!!errors.created_by}
+              invalidText={errors.created_by}
+              disabled
             />
-            <TextInput
+            {/* <TextInput
               id="email"
               name="email"
               labelText="Email"
@@ -102,18 +105,19 @@ const RaisingIsssueForm = () => {
               onChange={handleChange}
               invalid={!!errors.email}
               invalidText={errors.email}
-            />
-            
+            /> */}
+
             <TextArea
-              id="message"
-              name="message"
-              labelText="Message"
-              value={formData.message}
+              id="issue_description"
+              name="issue_description"
+              labelText="Issue Description"
+              value={formData.issue_description}
               onChange={handleChange}
-              invalid={!!errors.message}
-              invalidText={errors.message}
+              invalid={!!errors.issue_description}
+              invalidText={errors.issue_description}
+              placeholder="Plese describe your issues here..."
             />
-            
+
             {submitSuccess && (
               <InlineNotification
                 kind="success"
@@ -129,4 +133,4 @@ const RaisingIsssueForm = () => {
   );
 };
 
-export default RaisingIsssueForm;
+export default RaisingIssueForm;

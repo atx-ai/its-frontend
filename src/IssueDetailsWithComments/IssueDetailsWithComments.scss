@@ -1,0 +1,61 @@
+.issue-details-with-comments {
+  .issue-details-box {
+    background: #ffffff;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
+    border: 1px solid hsla(203, 50%, 30%, 0.15);
+    width: 90%;
+    display: block;
+    margin: 0 auto;
+    padding: 1.5rem;
+    max-width: 800px;
+    text-align: left;
+    border: 1px solid #b8b8b8;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
+    padding: 1rem;
+
+    .odd {
+      text-align: left;
+      border: 1px solid #ebf0e5;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
+      padding: 1rem;
+      position: relative;
+      background: #ebf0e5;
+      width: 49%;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: -18px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-right: 16px solid #ebf0e5;
+        border-bottom: 8px solid transparent;
+      }
+    }
+    .even {
+      text-align: right;
+      border: 1px solid #f2f2f2;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.1) 0 1px 3px 0;
+      padding: 1rem;
+      background-color: #f2f2f2;
+      position: relative;
+      width: 49%;
+      display: block;
+      margin-left: auto;
+      &::after {
+        content: "";
+        position: absolute;
+        right: -18px;
+        width: 0;
+        height: 0;
+        border-top: 8px solid transparent;
+        border-left: 16px solid #f2f2f2;
+        border-bottom: 8px solid transparent;
+      }
+    }
+  }
+}
